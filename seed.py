@@ -9,10 +9,14 @@ User.query.delete()
 
 movie1 = Movie(
     id=1,
-    overview="long time ago",
+    overview="long time ago!",
     title="Star Wars",
-    genre=71,
     release_year="1987"
+    # genre=[
+    #     12,
+    #     28,
+    #     878
+    # ]
 )
 
 db.session.add(movie1)
@@ -22,15 +26,14 @@ u1 = User(
     id=1,
     username="jokerbob",
     password="jokerbob",
-    email = 'bobsmith@wayneEnterpriese.com',
-    to_watch = 1
+    # to_watch = 1
 )
 
 u2 = User(
     id=2,
     username="jillygal",
     password="jillygal",
-    email="jillysmith@wayneEnerprises.com"
+    # to_watch=1
 )
 
 db.session.add_all([u1,u2])

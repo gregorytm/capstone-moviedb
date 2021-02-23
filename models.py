@@ -16,7 +16,7 @@ class User(db.Model):
                         nullable=False)
     img = db.Column(db.Text, 
                         default="static/images/default_user.jpeg")
-    to_watch = db.relationship('Watchlist', secondary='reviews')
+    to_watch = db.relationship('Movie', secondary='my_watchlist')
     
 
     @classmethod
@@ -51,7 +51,7 @@ class Movie(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     overview=db.Column(db.Text)
     title=db.Column(db.Text)
-    genre=db.Column(db.Integer)
+    # genre=db.Column(db.Integer)
     release_year=db.Column(db.Integer)
 
 class Watchlist(db.Model):
