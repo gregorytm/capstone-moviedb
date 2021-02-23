@@ -7,6 +7,17 @@ db.create_all()
 # Empty table
 User.query.delete()
 
+movie1 = Movie(
+    id=1,
+    overview="long time ago",
+    title="Star Wars",
+    genre=71,
+    release_year="1987"
+)
+
+db.session.add(movie1)
+db.session.commit()
+
 u1 = User(
     id=1,
     username="jokerbob",
@@ -22,13 +33,8 @@ u2 = User(
     email="jillysmith@wayneEnerprises.com"
 )
 
-movie1 = Movie(
-    id=1,
-    overview="long time ago",
-    title="Star Wars",
-    genre=71,
-    release_year="1987"
-)
+db.session.add_all([u1,u2])
+db.session.commit()
 
 watchlist1 = Watchlist(
     id=1,
@@ -44,8 +50,5 @@ review1 = Review(
     rating=7.2
 )
 
-db.session.add_all([movie1, watchlist1, review1])
-db.session.commit()
-
-db.session.add_all([ul, u2])
+db.session.add_all([watchlist1, review1])
 db.session.commit()

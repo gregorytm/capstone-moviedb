@@ -12,13 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///movies_capstone'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 
-db = SQLAlchemy()
-db.app = app
-db.init_app(app)
-
-# never useed this before but it works
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
+connect_db(app)
 
 API_KEY = "bda83f15a6dbfe7dedc91a90383a8b38"
 
