@@ -20,7 +20,8 @@ class User(db.Model):
     
 
     @classmethod
-    def register(cls, username, img, password):
+    def register(cls, username,password, img):
+        hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode("utf8")
         user = cls(
             username=username,
@@ -43,7 +44,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
-    comments = db.Column(db.Text)
+    comments = db.Column(db.String(150))
     rating = db.Column(db.Integer)
 
 class Movie(db.Model):

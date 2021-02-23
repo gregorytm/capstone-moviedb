@@ -5,7 +5,7 @@ db.drop_all()
 db.create_all()
 
 # Empty table
-User.query.delete()
+# User.query.delete()
 
 movie1 = Movie(
     id=1,
@@ -32,7 +32,7 @@ u1 = User(
 u2 = User(
     id=2,
     username="jillygal",
-    password="jillygal",
+    password="jillygal"
     # to_watch=1
 )
 

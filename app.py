@@ -1,16 +1,18 @@
-from flask import Flask, request, render_template, jsonify, session, redirect
+from flask import Flask, request, render_template, jsonify, session, redirect, flash
 from models import db, connect_db, User, Review, Movie, Watchlist
 from flask_sqlalchemy import SQLAlchemy
 from forms import UserForm, LoginForm
 import requests
-import os
 
 app = Flask(__name__)
+
+
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///movies_capstone'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
+app.config['SECRET_KEY'] = "oh-yes-51015"
 
 connect_db(app)
 
@@ -58,16 +60,18 @@ def new_user():
 
     if form.validate_on_submit():
         username = form.username.data
-        password = form.user.data
+        password = form.password.data
         img = form.img.data
 
         user = User.register(username, password, img)
 
+        # db.session.add(user)
         db.session.commit()
-        session['id'] = user.id
+        # session['id'] = user.id
 
-        return render_template('home.html')
+        return redirect('/')
     else:
+        flash('oops')
         return render_template("users/register.html", form=form)
 
 @app.route('/login', methods=['GET', 'POST'])

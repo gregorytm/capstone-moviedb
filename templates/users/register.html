@@ -4,8 +4,8 @@
 
 {% block content %}
 <h1>New User</h1>
-<form method="POST" >
-    <!-- {{ form.hidden_tag() }} hidden for validation -->
+<form method="POST">
+    {{ form.hidden_tag() }} <!--hidden fo validation-->
     {% for field in form
         if field.widget.input_type != 'hidden' %}
 
