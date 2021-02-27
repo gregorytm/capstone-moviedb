@@ -8,6 +8,16 @@ class UserForm(FlaskForm):
     img = StringField("user_img")
 
 class LoginForm(FlaskForm):
-    username = StringField("username", validators=[InputRequired(), Length(min=1, max =20)],)
+    username = StringField("username")
 
-    password = PasswordField("password", validators=[InputRequired(), Length(min=6, max=20)],)
+    password = PasswordField("password")
+
+class EditUserForm(FlaskForm):
+    """Edit user form"""
+
+    username = StringField('username')
+    img = StringField("user_img")
+
+class DeleteForm(FlaskForm):
+    """Delete form -- this form is intentionally blank."""
+    

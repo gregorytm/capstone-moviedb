@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Movie Watchlist{% endblock %}
+
+{% block content %}
+<h1>{{user.username}}'s watchlist:</h1>
+
+{% for movie in user.to_watch %}
+<p>
+    {{movie.title}}
+</p>
+{% endfor %}
+
+{% endblock %}

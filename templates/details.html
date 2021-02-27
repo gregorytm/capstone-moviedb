@@ -4,9 +4,21 @@
 
 {% block content %}
 
-<h1>{{title}}</h1>
+    <h1>{{movie.title}}</h1>
+    <h3>release date: {{movie.release_date}}</h3>
+    <h3>voter average: {{movie.vote_average}}</h3>
 
+    <p>{{movie.overview}}</p>
 
+    <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="">
 
+    <form action="/">
+        <input type="submit" value="new search">
+    </form>
 
+    <form action="/api/movies/search/{{movie.id}}" method="POST" id="add">
+        <input type="submit" value="Add to Watchlist"/>
+    </form>
+
+    <!-- <a href="/api/movies/search/{{movie.id}}">Add to watchlist</a> -->
 {% endblock %}

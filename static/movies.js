@@ -13,27 +13,19 @@ async function processForm(evt) {
     showMovie(res)
 }
 
-// async function processForm(evt) {
-//     evt.preventDefault()
-//     // URL search params 
-//     const params = {};
-//     params.title = $('#title').val()
-//     console.log(title)
-//     const resp = await axios.get("/api/movies", params);
-//     console.log(resp)
-//     res = Object.entries(resp.data)
-//     console.log(res)
-//     showMovie(res)
-// }
-
  function showMovie(res){
     console.log(res)
+    clearAll()
     $('<ul>').appendTo('body')
     for(const [key, value] of res){
         const listItem = $('<li>')
-        $('<a>').attr('href', `/api/movies/search/${value.id}`).text(value.title).appendTo(listItem)
+        $('<a>').attr('href', `/api/movies/search/${value.id}`).text(value.title).attr('id', 'details').appendTo(listItem)
         listItem.appendTo('ul')
     }
+}
+
+function clearAll(){
+    $('ul').remove()
 }
 
 $("#movie-form").on("submit", processForm);

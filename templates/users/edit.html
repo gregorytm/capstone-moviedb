@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}edit profile{% endblock %}
+
+{% block content %}
+<h1>Edit your Profile</h1>
+
+    <form method="POST" id="edit">
+        {{ form.hidden_tag() }} <!--hidden for validation-->
+
+        {% for field in form
+            if field.widget.input_type != 'hidden' %}
+
+            <p>
+                {{field.label}}
+                {{field}}
+            </p>
+        {% endfor %}
+        <button>Update</button>
+    </form>
+
+    <form>
+    <button
+        formaction="/users/delete/{{ user.id }}"
+        formmethod="POST">
+        Delete User
+    </button>
+    </form>
+
+{% endblock%}

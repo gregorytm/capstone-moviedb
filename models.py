@@ -15,12 +15,15 @@ class User(db.Model):
     password = db.Column(db.Text,
                         nullable=False)
     img = db.Column(db.Text, 
+                        nullable=False,
                         default="static/images/default_user.jpeg")
     to_watch = db.relationship('Movie', secondary='my_watchlist')
     
 
     @classmethod
-    def register(cls, username,password, img):
+    def register(cls, username, password, img):
+        """hash user password"""
+
         hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode("utf8")
         user = cls(
@@ -28,6 +31,9 @@ class User(db.Model):
             password=hashed_utf8,
             img=img
         )
+
+        db.session.add(user)
+        return user
 
     @classmethod
     def authenticate(cls, username, password):
@@ -60,10 +66,6 @@ class Watchlist(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     user_id=db.Column(db.Integer, db.ForeignKey('users.id'))
     movie_id=db.Column(db.Integer, db.ForeignKey('movies.id'))
-    added_date=db.Column(db.Integer)
-
-    
-
 
 def connect_db(app):
     """connect the db"""
