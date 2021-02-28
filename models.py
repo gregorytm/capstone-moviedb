@@ -56,16 +56,18 @@ class Review(db.Model):
 class Movie(db.Model):
     __tablename__="movies"
     id=db.Column(db.Integer, primary_key=True)
+    movie_id=db.Column(db.Integer)
     overview=db.Column(db.Text)
     title=db.Column(db.Text)
-    # genre=db.Column(db.Integer)
-    release_year=db.Column(db.Integer)
+    release_date=db.Column(db.DateTime)
+    poster_path = db.Column(db.Text)
+    vote_average = db.Column(db.Integer)
 
 class Watchlist(db.Model):
     __tablename__="my_watchlist"
     id=db.Column(db.Integer, primary_key=True)
-    user_id=db.Column(db.Integer, db.ForeignKey('users.id'))
-    movie_id=db.Column(db.Integer, db.ForeignKey('movies.id'))
+    user_id=db.relationship(db.Integer, db.ForeignKey('users.id'))
+    movie_id=db.relationship(db.Integer, db.ForeignKey('movies.id'))
 
 def connect_db(app):
     """connect the db"""

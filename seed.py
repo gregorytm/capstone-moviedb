@@ -8,10 +8,10 @@ db.create_all()
 # User.query.delete()
 
 movie1 = Movie(
-    id=1,
+    movie_id = 1,
     overview="long time ago!",
     title="Star Wars",
-    release_year="1987"
+    # release_date="1987"
 )
 
 db.session.add(movie1)

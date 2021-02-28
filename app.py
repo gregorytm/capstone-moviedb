@@ -48,41 +48,29 @@ def endpoint():
         movies.append(movie_info)
     return jsonify(movies)
 
+#movie details
 @app.route("/api/movies/search/<id>", methods=["GET"])
 def title_page(id):
-
-    res = requests.get("https://api.themoviedb.org/3/movie/" + id, params = {'api_key': API_KEY})
-
-    data = res.json()
-    
-    movie={}
-
-    movie["id"] = data["id"]
-
-    movie["title"] = data["title"]
-
-    movie["overview"] = data['overview']
-
-    movie["poster_path"] = data['poster_path']
-
-    movie["release_date"] = data['release_date']
-
-    movie["vote_average"] = data['vote_average']
-
+    movie = get_movie_by_id(id)
     return render_template("details.html", movie=movie)
 
-#add to watchlist
+# add to watchlist
 @app.route('/api/movies/search/<id>', methods=["POST"])
 def add_watchlist(id):
-    
+
+    movie = get_movie_by_id(id)
+    print('~~~!!!')
+    print(movie)
+    db.session.add(movie)
+    db.session.commit()
+
     user_id = session['id']
     movie_id = id
+    watch = Watchlist(user_id=user_id, movie_id=movie_id)
 
-    movie = Watchlist(user_id, movie_id)
-
-    db.session.add(movie)
-    return render_template("templates/watchlist.html")
-
+    db.session.add(watchlist)
+    db.session.commit()
+    return redirect("/users/<int:id>/watchlist")
 
 
 # user register, login/out, user details page & delete user
@@ -206,4 +194,37 @@ def watchlist(id):
         flash("Access unauthorized", "danger")
         return redirect('/login')
     
-    return render_template('watchlist.html', user=user)
+    return render_template('templates/watchlist.html', user=user)
+
+
+
+#make movie api call
+def get_movie_by_id(id):
+    res = requests.get("https://api.themoviedb.org/3/movie/" + id, params = {'api_key': API_KEY})
+
+    data = res.json()
+
+    return Movie(movie_id=data["id"], title=data["title"], overview=data["overview"], poster_path=data["poster_path"], release_date=data["release_date"], vote_average=data["vote_average"])
+
+
+# def get_movie_by_id(id):
+#     res = requests.get("https://api.themoviedb.org/3/movie/" + id, params = {'api_key': API_KEY})
+
+#     data = res.json()
+
+#     movie={}
+
+#     movie["movie_id"] = data["id"]
+
+#     movie["title"] = data["title"]
+
+#     movie["overview"] = data['overview']
+
+#     movie["poster_path"] = data['poster_path']
+
+#     movie["release_date"] = data['release_date']
+
+#     movie["vote_average"] = data['vote_average']
+
+#     return movie
+
