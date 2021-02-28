@@ -207,24 +207,3 @@ def get_movie_by_id(id):
     return Movie(movie_id=data["id"], title=data["title"], overview=data["overview"], poster_path=data["poster_path"], release_date=data["release_date"], vote_average=data["vote_average"])
 
 
-# def get_movie_by_id(id):
-#     res = requests.get("https://api.themoviedb.org/3/movie/" + id, params = {'api_key': API_KEY})
-
-#     data = res.json()
-
-#     movie={}
-
-#     movie["movie_id"] = data["id"]
-
-#     movie["title"] = data["title"]
-
-#     movie["overview"] = data['overview']
-
-#     movie["poster_path"] = data['poster_path']
-
-#     movie["release_date"] = data['release_date']
-
-#     movie["vote_average"] = data['vote_average']
-
-#     return movie
-

@@ -15,12 +15,12 @@ movie1 = Movie(
 )
 
 db.session.add(movie1)
-db.session.commit()
 
 u1 = User.register(
     username="jokerbob",
     password="jokerbob",
-    img="static/images/default_user.jpeg"
+    img="static/images/default_user.jpeg",
+    # to_watch=1
 )
 
 u2 = User.register(
@@ -39,10 +39,13 @@ review1 = Review(
     rating=7.2
 )
 
+db.session.add(review1)
+db.session.commit()
+
 watchlist1 = Watchlist(
     user_id=1,
     movie_id=1,
 )
 
-db.session.add_all([watchlist1, review1])
+db.session.add(watchlist1)
 db.session.commit()
