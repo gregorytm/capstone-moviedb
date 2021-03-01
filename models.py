@@ -56,10 +56,10 @@ class Review(db.Model):
 class Movie(db.Model):
     __tablename__="movies"
     id=db.Column(db.Integer, primary_key=True)
-    movie_id=db.Column(db.Integer)
+    movie_id=db.Column(db.Integer, unique=True)
     overview=db.Column(db.Text)
     #error
-    title=db.Column(db.Text, unique=True)
+    title=db.Column(db.Text)
     release_date=db.Column(db.DateTime)
     poster_path = db.Column(db.Text)
     vote_average = db.Column(db.Integer)
