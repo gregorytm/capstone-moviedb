@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = "oh-yes-51015"
 
 connect_db(app)
 
-API_KEY = "bda83f15a6dbfe7dedc91a90383a8b38"
+API_KEY = ""
 
 @app.route("/")
 def homepage():
@@ -59,10 +59,6 @@ def title_page(id):
 def add_watchlist(id):
 
     movie = get_movie_by_id(id)
-    print('~~~!!!')
-    print(movie)
-    # db.session.add(movie)
-    # db.session.commit()
 
     curr_user = session['id']
     user=User.query.get(curr_user)
@@ -71,12 +67,6 @@ def add_watchlist(id):
     db.session.add(user)
     db.session.commit()
 
-
-    # user_id = session['id']
-    # movie_id = id
-    # watch = Watchlist(user_id=user_id, movie_id=movie_id)
-    # db.session.add(watchlist)
-    # db.session.commit()
     return redirect(f"/users/{curr_user}/watchlist")
 
 
