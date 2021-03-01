@@ -61,16 +61,23 @@ def add_watchlist(id):
     movie = get_movie_by_id(id)
     print('~~~!!!')
     print(movie)
-    db.session.add(movie)
+    # db.session.add(movie)
+    # db.session.commit()
+
+    curr_user = session['id']
+    user=User.query.get(curr_user)
+    
+    user.to_watch.append(movie)
+    db.session.add(user)
     db.session.commit()
 
-    user_id = session['id']
-    movie_id = id
-    watch = Watchlist(user_id=user_id, movie_id=movie_id)
 
-    db.session.add(watchlist)
-    db.session.commit()
-    return redirect("/users/<int:id>/watchlist")
+    # user_id = session['id']
+    # movie_id = id
+    # watch = Watchlist(user_id=user_id, movie_id=movie_id)
+    # db.session.add(watchlist)
+    # db.session.commit()
+    return redirect(f"/users/{curr_user}/watchlist")
 
 
 # user register, login/out, user details page & delete user
@@ -186,15 +193,15 @@ def delete_todo(id):
 
 
 # user watchlist
-@app.route('/users/<int:id>/watchlist', methods=["GET", "POST"])
+@app.route(f'/users/<int:id>/watchlist', methods=["GET", "POST"])
 def watchlist(id):
-    user = User.query.get_or_404(id)
 
+    user = User.query.get_or_404(id)
     if 'id' not in session:
         flash("Access unauthorized", "danger")
         return redirect('/login')
-    
-    return render_template('templates/watchlist.html', user=user)
+    else:
+        return render_template('watchlist.html', user=user)
 
 
 
