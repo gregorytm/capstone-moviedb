@@ -45,20 +45,19 @@ class User(db.Model):
         else:
             return False
 
-class Review(db.Model):
-    __tablename__="reviews"
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    local_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
-    comments = db.Column(db.String(150))
-    rating = db.Column(db.Integer)
+# class Review(db.Model):
+#     __tablename__="reviews"
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete="cascade"))
+#     local_id = db.Column(db.Integer, db.ForeignKey('movies.tmdb_id', ondelete="cascade"))
+#     comments = db.Column(db.String(150))
+#     rating = db.Column(db.Integer)
 
 class Movie(db.Model):
     __tablename__="movies"
-    id=db.Column(db.Integer, primary_key=True)
-    tmdb_id=db.Column(db.Integer, unique=True)
+    # id=db.Column(db.Integer, primary_key=True)
+    tmdb_id=db.Column(db.Integer, primary_key=True)
     overview=db.Column(db.Text)
-    #error
     title=db.Column(db.Text)
     release_date=db.Column(db.DateTime)
     poster_path = db.Column(db.Text)
@@ -66,10 +65,10 @@ class Movie(db.Model):
 
 class Watchlist(db.Model):
     __tablename__="my_watchlist"
-    id=db.Column(db.Integer, primary_key=True)
-    user_id=db.Column(db.Integer, db.ForeignKey('users.id'))
-    local_id=db.Column(db.Integer, db.ForeignKey('movies.id'))
-    
+    # id=db.Column(db.Integer, primary_key=True)
+    user_id=db.Column(db.Integer, db.ForeignKey('users.id', ondelete='cascade'), primary_key=True)
+    tmdb_id=db.Column(db.Integer, db.ForeignKey('movies.tmdb_id', ondelete='cascade'), primary_key=True)
+
 def connect_db(app):
     """connect the db"""
     

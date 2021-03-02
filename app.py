@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify, session, redirect, flash
-from models import db, connect_db, User, Review, Movie, Watchlist
+from models import db, connect_db, User, Movie, Watchlist
 from flask_sqlalchemy import SQLAlchemy
 from forms import UserForm, LoginForm, EditUserForm, DeleteForm
 

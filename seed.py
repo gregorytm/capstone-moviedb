@@ -1,5 +1,5 @@
 from app import app
-from models import db, User, Movie, Watchlist, Review, User
+from models import db, User, Movie, Watchlist, User
 
 db.drop_all()
 db.create_all()
@@ -32,19 +32,19 @@ u2 = User.register(
 db.session.add_all([u1,u2])
 db.session.commit()
 
-review1 = Review(
-    user_id=1,
-    local_id=1,
-    comments="its ok",
-    rating=7.2
-)
+# review1 = Review(
+#     user_id=1,
+#     local_id=1,
+#     comments="its ok",
+#     rating=7.2
+# )
 
-db.session.add(review1)
-db.session.commit()
+# db.session.add(review1)
+# db.session.commit()
 
 watchlist1 = Watchlist(
     user_id=1,
-    local_id=1,
+    tmdb_id=1,
 )
 
 db.session.add(watchlist1)
