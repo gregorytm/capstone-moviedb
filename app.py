@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = "oh-yes-51015"
 
 connect_db(app)
 
-API_KEY = ""
+API_KEY = "bda83f15a6dbfe7dedc91a90383a8b38"
 
 @app.route("/")
 def homepage():
@@ -49,29 +49,64 @@ def endpoint():
     return jsonify(movies)
 
 #movie details
-@app.route("/api/movies/search/<id>", methods=["GET"])
+@app.route("/api/movies/<id>", methods=["GET"])
 def title_page(id):
     movie = get_movie_by_id(id)
     return render_template("details.html", movie=movie)
 
 # add to watchlist
-@app.route('/api/movies/search/<id>', methods=["POST"])
+@app.route('/api/movies/<id>', methods=["POST"])
 def add_watchlist(id):
 
-    movie = get_movie_by_id(id)
+    session_id = session['id']
+    print("-!")
+    print(session_id)
+    print("--!")
 
-    curr_user = session['id']
-    user=User.query.get(curr_user)
-    
-    user.to_watch.append(movie)
-    db.session.add(user)
-    db.session.commit()
+    user=User.query.get(session_id)
+    print(user.username)
+    print("---!")
 
-    return redirect(f"/users/{curr_user}/watchlist")
+    print(id)
+    check = Movie.query.filter_by(tmdb_id=id)
+    print('----!')
+    print(check)
+
+    if check == True:
+        print('----!')
+        print(id)
+        local_movie = Movie.query.get(id)
+        print(local_movie)
+        user.to_watch.append(local_movie)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(f"/users/{session_id}/watchlist")
+    else:
+
+        movie = get_movie_by_id(id)
+        print(movie)
+        
+        user.to_watch.append(movie)
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(f"/users/{session_id}/watchlist")
+
+
+# user watchlist
+@app.route(f'/users/<int:id>/watchlist', methods=["GET", "POST"])
+def watchlist(id):
+
+    user = User.query.get_or_404(id)
+    if 'id' not in session:
+        flash("Access unauthorized", "danger")
+        return redirect('/users/login')
+    else:
+        return render_template('watchlist.html', user=user)
 
 
 # user register, login/out, user details page & delete user
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/users/register", methods=["GET", "POST"])
 def new_user():
     
     if 'id' in session:
@@ -97,7 +132,7 @@ def new_user():
         return render_template("users/register.html", form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/users/login', methods=['GET', 'POST'])
 def login():
 
     if 'id' in session:
@@ -120,7 +155,7 @@ def login():
     else:
         return render_template("users/login.html", form=form)
 
-@app.route("/logout")
+@app.route("/users/logout")
 def logout():
     if "id" in session:
         session.pop('id')
@@ -137,7 +172,7 @@ def update_profile(id):
 
     if 'id' not in session:
         flash("Access unauthorized", "danger")
-        return redirect('/login')
+        return redirect('/users/login')
     
     username = user.username
     img = user.img
@@ -170,7 +205,7 @@ def delete_todo(id):
 
     if 'id' not in session:
         flash("Access unauthorized", "danger")
-        return redirect('/login')
+        return redirect('/users/login')
 
     form=DeleteForm()
 
@@ -181,26 +216,12 @@ def delete_todo(id):
 
     return redirect('/')
 
-
-# user watchlist
-@app.route(f'/users/<int:id>/watchlist', methods=["GET", "POST"])
-def watchlist(id):
-
-    user = User.query.get_or_404(id)
-    if 'id' not in session:
-        flash("Access unauthorized", "danger")
-        return redirect('/login')
-    else:
-        return render_template('watchlist.html', user=user)
-
-
-
 #make movie api call
 def get_movie_by_id(id):
     res = requests.get("https://api.themoviedb.org/3/movie/" + id, params = {'api_key': API_KEY})
 
     data = res.json()
 
-    return Movie(movie_id=data["id"], title=data["title"], overview=data["overview"], poster_path=data["poster_path"], release_date=data["release_date"], vote_average=data["vote_average"])
+    return Movie(tmdb_id=data["id"], title=data["title"], overview=data["overview"], poster_path=data["poster_path"], release_date=data["release_date"], vote_average=data["vote_average"])
 
 

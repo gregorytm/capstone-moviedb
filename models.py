@@ -49,14 +49,14 @@ class Review(db.Model):
     __tablename__="reviews"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    movie_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'))
+    local_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
     comments = db.Column(db.String(150))
     rating = db.Column(db.Integer)
 
 class Movie(db.Model):
     __tablename__="movies"
     id=db.Column(db.Integer, primary_key=True)
-    movie_id=db.Column(db.Integer)
+    tmdb_id=db.Column(db.Integer, unique=True)
     overview=db.Column(db.Text)
     #error
     title=db.Column(db.Text)
@@ -68,8 +68,8 @@ class Watchlist(db.Model):
     __tablename__="my_watchlist"
     id=db.Column(db.Integer, primary_key=True)
     user_id=db.Column(db.Integer, db.ForeignKey('users.id'))
-    movie_id=db.Column(db.Integer, db.ForeignKey('movies.movie_id'))
-
+    local_id=db.Column(db.Integer, db.ForeignKey('movies.id'))
+    
 def connect_db(app):
     """connect the db"""
     

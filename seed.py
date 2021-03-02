@@ -8,7 +8,7 @@ db.create_all()
 # User.query.delete()
 
 movie1 = Movie(
-    movie_id = 1,
+    tmdb_id = 1,
     overview="long time ago!",
     title="Star Wars",
     # release_date="1987"
@@ -34,7 +34,7 @@ db.session.commit()
 
 review1 = Review(
     user_id=1,
-    movie_id=1,
+    local_id=1,
     comments="its ok",
     rating=7.2
 )
@@ -44,7 +44,7 @@ db.session.commit()
 
 watchlist1 = Watchlist(
     user_id=1,
-    movie_id=1,
+    local_id=1,
 )
 
 db.session.add(watchlist1)

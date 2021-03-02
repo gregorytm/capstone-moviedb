@@ -19,7 +19,7 @@ async function processForm(evt) {
     $('<ul>').appendTo('body')
     for(const [key, value] of res){
         const listItem = $('<li>')
-        $('<a>').attr('href', `/api/movies/search/${value.id}`).text(value.title).attr('id', 'details').appendTo(listItem)
+        $('<a>').attr('href', `/api/movies/${value.id}`).text(value.title).attr('id', 'details').appendTo(listItem)
         listItem.appendTo('ul')
     }
 }
