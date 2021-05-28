@@ -59,7 +59,7 @@ class Movie(db.Model):
     tmdb_id=db.Column(db.Integer, primary_key=True)
     overview=db.Column(db.Text)
     title=db.Column(db.Text)
-    release_date=db.Column(db.DateTime)
+    release_date=db.Column(db.Text)
     poster_path = db.Column(db.Text)
     vote_average = db.Column(db.Integer)
 

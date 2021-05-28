@@ -1,0 +1,209 @@
+body {
+  background-image: url("/static/images/photo-1489599849927-2ee91cede3ba.jpeg");
+  background-position: bottom;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+.presentation {
+  display: flex;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: black;
+}
+
+.movie-search {
+  display: block;
+  padding: 2em;
+  width: 100%;
+}
+
+.delete-form {
+  display: inline-block;
+}
+
+.messages p {
+  margin:auto;
+  padding: 1rem;
+  font-size:1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  width: 70rem;
+  font-family: 'Anton', sans-serif;
+}
+
+.messages .success {
+  background-color: #2596be;
+  opacity:0.5;
+}
+
+.messages .error {
+  background-color: red;
+  opacity:0.5;
+}
+
+.nav-background {
+  background: url("/static/images/rsz_popcorn1.jpg") no-repeat center center;
+  width: 100%;
+  font-size: x-large;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.nav-link {
+font-family: 'Anton', sans-serif;
+}
+
+.logo {
+  color: black;
+  font-family: 'Fascinate', cursive;
+  background-color: gray;
+  text-align: center;
+  padding: 1rem;
+}
+
+.login-text {
+  display: inline-block;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+}
+
+.main-title {
+  text-align: center;
+}
+
+.login-group {
+  flex-direction: column;
+}
+
+.login-line {
+  float: left;
+}
+
+.general-form {
+  background-color: gray;
+  border-radius: 30px;
+  padding: 4em;
+  max-width: 30em;
+  margin:1em auto;
+  padding: 1em 3em;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.movie-details {
+  background-color: gray;
+  border-radius: 30px;
+  padding: 4em;
+  text-align: center;
+  max-width: 100em;
+  margin:1em auto;
+  padding: 1em 3em;
+}
+
+.cake-button{
+  width: 180px;
+  color: black;
+}
+
+.watchlist-form{
+  border-radius: 1rem;
+  background-color: #2596be;
+  font-family: 'Anton', sans-serif;
+  opacity:0.3;
+}
+
+.update-btn{
+  margin-bottom: .7em;
+  border-radius: 1rem;
+  background-color: #2596be;
+  font-family: 'Anton', sans-serif;
+  opacity:0.3;
+  margin-top: 1em;
+}
+
+.trash-btn{
+  border-radius: 30px;
+}
+
+.watchlist-btn{
+  margin-top: 1em;
+}
+
+.newUser-btn {
+  border-radius: 1rem;
+  background-color: #2596be;
+  font-family: 'Anton', sans-serif;
+  opacity:0.3;
+}
+
+.login-btn {
+  border-radius: 1rem;
+  background-color: #2596be;
+  font-family: 'Anton', sans-serif;
+  opacity:0.3;
+  margin-bottom: 0%;
+}
+
+.delete-user-btn {
+  border-radius: 1rem;
+  background-color: #cf2f2f;
+  font-family: 'Anton', sans-serif;
+  opacity:0.3;
+
+}
+
+.general-form .trash-itm:hover{
+  color: #2596be; 
+}
+
+.navbar-light .navbar-nav .nav-link:hover { 
+  color: #2596be; 
+  opacity: 1;
+}
+
+.cake-button:hover { 
+  color: #2596be; 
+  opacity: 1;
+}
+.watchlist-form:hover {
+  opacity: 1;
+}
+
+.login-btn:hover {
+  opacity: 1;
+}
+
+.newUser-btn:hover {
+  opacity:1;
+}
+
+.delete-user-btn:hover {
+  opacity: 1;
+}
+
+.update-btn:hover {
+  opacity: 1;
+}
+
+@media only screen and (max-width: 1180px) {
+  .messages p {
+    width: 15rem;
+  }
+
+  .movie-details img {
+    width: 15rem;
+  } 
+}
+
+@media only screen and (max-width: 350px) {
+  .movie-details img {
+    display: none;
+  }
+}

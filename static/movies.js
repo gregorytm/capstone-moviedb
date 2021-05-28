@@ -1,8 +1,6 @@
 async function processForm(evt) {
     evt.preventDefault()
-    // URL search params 
     search = $('#title').val()
-    console.log(search)
     const resp = await axios.get("/api/movies", {params: {
         title:search
         }
@@ -24,8 +22,8 @@ async function processForm(evt) {
     }
 }
 
-function clearAll(){
-    $('ul').remove()
+function clearAll() {
+  $("ul").remove();
 }
 
 $("#movie-form").on("submit", processForm);

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Greg's movie time sinkhole{% endblock %}
+
+{% block content %}
+
+<ul class="general-form">
+  {% for movie in movies %}
+    <li><a href="{{ url_for('title_page', id=movie.id) }}">{{movie.title}} ({{movie.release_date}})</a></li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

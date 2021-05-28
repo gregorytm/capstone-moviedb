@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<div class="movie-details">
     <h1>{{movie.title}}</h1>
     <h3>release date: {{movie.release_date}}</h3>
     <h3>voter average: {{movie.vote_average}}</h3>
@@ -12,13 +13,17 @@
 
     <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="">
 
-    <form action="/">
-        <input type="submit" value="new search">
+    {% if 'id' not in session %}
+    <form action="/users/register" method="POST" id="add" class="watchlist-btn">
+        <input type="submit" value="Add to Watchlist" class="watchlist-form"/>
     </form>
+    {% endif %}
 
-    <form action="/api/movies/{{movie.tmdb_id}}" method="POST" id="add">
-        <input type="submit" value="Add to Watchlist"/>
+    {% if 'id' in session %}
+    <form action="/api/movies/{{movie.tmdb_id}}" method="POST" id="add" class="watchlist-btn">
+        <input type="submit" value="Add to Watchlist" class="watchlist-form"/>
     </form>
+    {% endif %}
+</div>
 
-    <!-- <a href="/api/movies/search/{{movie.id}}">Add to watchlist</a> -->
 {% endblock %}

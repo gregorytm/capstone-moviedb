@@ -7,14 +7,13 @@ db.create_all()
 # Empty table
 # User.query.delete()
 
-movie1 = Movie(
-    tmdb_id = 1,
-    overview="long time ago!",
-    title="Star Wars",
-    # release_date="1987"
-)
+# movie1 = Movie(
+#     tmdb_id = 1,
+#     overview="long time ago!",
+#     title="Star Wars",
+# )
 
-db.session.add(movie1)
+# db.session.add(movie1)
 
 u1 = User.register(
     username="jokerbob",
@@ -42,10 +41,10 @@ db.session.commit()
 # db.session.add(review1)
 # db.session.commit()
 
-watchlist1 = Watchlist(
-    user_id=1,
-    tmdb_id=1,
-)
+# watchlist1 = Watchlist(
+#     user_id=1,
+#     tmdb_id=1,
+# )
 
-db.session.add(watchlist1)
-db.session.commit()
+# db.session.add(watchlist1)
+# db.session.commit()

@@ -3,14 +3,25 @@
 {% block title %}Movie Watchlist{% endblock %}
 
 {% block content %}
+
+<div class="general-form">
 <h1>{{user.username}}'s watchlist:</h1>
-
+<ul>
 {% for movie in user.to_watch %}
-<p>
-    {{movie.title}}
-</p>
-{% endfor %}
+<li>
+  <a href="{{url_for('title_page', id=movie.tmdb_id) }}">{{movie.title}}</a> 
 
-<a href="/">Search</a>
+  <form action="/watchlist/{{movie.tmdb_id}}/delete" class="delete-form" method="POST">
+    <button class="trash-btn">
+      <i class="fas fa-trash-alt trash-itm"></i>
+    </button>
+  </form>
+
+</li>
+
+{% endfor %}
+</ul>
+
+</div>
 {% endblock %}
 

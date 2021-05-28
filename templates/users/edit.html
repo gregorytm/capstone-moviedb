@@ -3,28 +3,32 @@
 {% block title %}edit profile{% endblock %}
 
 {% block content %}
+<div class="general-form">
 <h1>Edit your Profile</h1>
 
-    <form method="POST" id="edit">
+    <form method="POST" id="edit" class="row g-3">
         {{ form.hidden_tag() }} <!--hidden for validation-->
 
         {% for field in form
             if field.widget.input_type != 'hidden' %}
 
-            <p>
-                {{field.label}}
-                {{field}}
-            </p>
+            <div class="col-12">
+                {{field.label(class = "form-label")}}
+                {{field(class="form-control")}}
+            </div>
         {% endfor %}
-        <button>Update</button>
+        <button type="button" class="update-btn">Update</button>
     </form>
 
-    <form>
+    <form class="row g-3">
     <button
-        formaction="/users/delete/{{ user.id }}"
+    class="delete-user-btn"
+        formaction="/users/delete"
         formmethod="POST">
         Delete User
     </button>
     </form>
+
+</div>
 
 {% endblock%}
